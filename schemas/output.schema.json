@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AlcoholRoutePlannerOutput",
+  "type": "object",
+  "required": [
+    "normalized_request",
+    "routes",
+    "recommended_route_id",
+    "visual_spec"
+  ],
+  "properties": {
+    "normalized_request": {
+      "type": "object"
+    },
+    "routes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "route_id",
+          "route_name",
+          "start",
+          "end",
+          "total_distance_km",
+          "estimated_walk_minutes",
+          "checkpoint_count",
+          "checkpoints",
+          "overall_score"
+        ],
+        "properties": {
+          "route_id": {
+            "type": "string"
+          },
+          "route_name": {
+            "type": "string"
+          },
+          "route_character": {
+            "type": "string"
+          },
+          "start": {
+            "$ref": "#/$defs/place"
+          },
+          "end": {
+            "$ref": "#/$defs/place"
+          },
+          "total_distance_km": {
+            "type": "number"
+          },
+          "estimated_walk_minutes": {
+            "type": "integer"
+          },
+          "checkpoint_count": {
+            "type": "integer"
+          },
+          "checkpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/checkpoint"
+            }
+          },
+          "landmarks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/place"
+            }
+          },
+          "scores": {
+            "type": "object",
+            "properties": {
+              "distance_fit": {
+                "type": "number"
+              },
+              "store_fit": {
+                "type": "number"
+              },
+              "navigation": {
+                "type": "number"
+              },
+              "nightlife": {
+                "type": "number"
+              },
+              "experience": {
+                "type": "number"
+              },
+              "spacing": {
+                "type": "number"
+              }
+            }
+          },
+          "overall_score": {
+            "type": "number"
+          },
+          "pros": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "recommended_route_id": {
+      "type": "string"
+    },
+    "recommendation_reason": {
+      "type": "string"
+    },
+    "visual_spec": {
+      "type": "object",
+      "required": [
+        "aspect_ratio",
+        "must_show"
+      ],
+      "properties": {
+        "aspect_ratio": {
+          "type": "string"
+        },
+        "must_show": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "image_prompt": {
+          "type": "string"
+        }
+      }
+    },
+    "navigation_export": {
+      "type": "object",
+      "properties": {
+        "geojson": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "waypoints": {
+          "type": "array"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "place": {
+      "type": "object",
+      "required": [
+        "name",
+        "lat",
+        "lon"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number"
+        },
+        "lon": {
+          "type": "number"
+        },
+        "address": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "checkpoint": {
+      "type": "object",
+      "required": [
+        "order",
+        "name",
+        "lat",
+        "lon"
+      ],
+      "properties": {
+        "order": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "brand": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lat": {
+          "type": "number"
+        },
+        "lon": {
+          "type": "number"
+        },
+        "address": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "distance_from_previous_m": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "opening_hours": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "poi_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}
